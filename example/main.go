@@ -7,7 +7,7 @@ import (
     "log"
     "net/http"
 
-    tea "github.com/charmbracelet/bubbletea"
+    //tea "github.com/charmbracelet/bubbletea"
     "os"
 )
 
@@ -77,7 +77,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 }
 func (m model) View() string {
     // The header
-    s := "What should we buy at the market?\n\n"
+    s := "Which account should we use?\n\n"
 
     // Iterate over our choices
     for i, choice := range m.choices {
@@ -106,6 +106,7 @@ func (m model) View() string {
 }
 func main() {
 
+    
     values := map[string]string{"jsonrpc":"2.0","method":"eth_accounts","id":"1"}
     json_data, err := json.Marshal(values)
 
@@ -129,7 +130,7 @@ func main() {
     for i, v := range aInterface {
         aString[i] = v.(string)
     }
-    fmt.Println(aString)
+
     p := tea.NewProgram(initialModel(aString))
     if err := p.Start(); err != nil {
         fmt.Printf("Alas, there's been an error: %v", err)
