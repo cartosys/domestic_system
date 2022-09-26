@@ -95,7 +95,7 @@ func (m model) View() string {
 	return "\n" + m.list.View()
 }
 
-func Main() {
+func List() {
 	items := []list.Item{
 		item("Ramen"),
 		item("Tomato Soup"),
@@ -125,4 +125,6 @@ func Main() {
 		fmt.Println("Error running program:", err)
 		os.Exit(1)
 	}
+
+	
 }

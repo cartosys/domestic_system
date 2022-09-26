@@ -1,4 +1,4 @@
-module main
+module domestic_system
 
 go 1.18
 

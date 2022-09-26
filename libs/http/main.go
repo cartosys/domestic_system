@@ -1,4 +1,4 @@
-package main
+package http
 
 // A simple program that makes a GET request and prints the response status.
 
