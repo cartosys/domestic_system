@@ -6,6 +6,10 @@ browserless sub web 3
 sudo service docker start
 sudo docker run hello-world
 
+#jpeg to ANSI
+sudo apt install jp2a //txt based
+curl https://live---metadata-5covpqijaa-uc.a.run.app/images/5268 --output - | jp2a --size=40x20 --colors --clear - //usage
+
 #curl rpc commands running ganache-cli
 curl http://127.0.0.1:8545 -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params": [],"id":1}'
 curl http://127.0.0.1:8545 -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"eth_accounts","params": [],"id":1}'
