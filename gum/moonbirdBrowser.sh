@@ -42,20 +42,26 @@ OUTPUT=$(gum style \
         --align center  --margin "1 40" --padding "2 4" \
         "${MOONBIRD}")
 
-
+clear
 echo "${HEADER}"
 echo "${OUTPUT}"
 TRAITTABLE=""
-for row in $(echo "${MOONBIRDDATA}" | jq -r '.[] | @base64'); do
 
-      TRAITTABLE+=$(echo ${row} | base64 --decode | jq -r '.trait_type')
-      TRAITTABLE+=": "
-      TRAITTABLE+=$(echo ${row} | base64 --decode | jq -r '.value')
-      TRAITTABLE+=$(printf "\n\n")
+function getTraitTable () {
+  for row in $(echo "${MOONBIRDDATA}" | jq -r '.[] | @base64'); do
 
-done
+        KEY=$(echo ${row} | base64 --decode | jq -r '.trait_type')
+        SEPERATOR=": "
+        VALUE=$(echo ${row} | base64 --decode | jq -r '.value')
+        #TRAITTABLE+=$(printf "${KEY}${SEPERATOR}${VALUE}\n\n")
+        TRAITTABLE+=$(echo "${KEY}: ${VALUE}")
+        echo $(echo "${KEY}: ${VALUE}")
+  done
+}
+
+
 OUTPUT=$(gum style \
         --foreground 212 --border-foreground 212 --border double \
         --align center  --margin "1 40" --padding "2 4" \
-        "${TRAITTABLE}")
+        "$(getTraitTable)")
 echo "${OUTPUT}"
