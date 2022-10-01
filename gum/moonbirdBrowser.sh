@@ -5,6 +5,8 @@ STORAGEFOLDER=/tmp/domestic_system_storage
 [ ! -d "${STORAGEFOLDER}" ] && mkdir ${STORAGEFOLDER}
 
 TOKENID=$1
+#VIEWPORTMIDDLE=$(tput cols)
+#VIEWPORTMIDDLE=$(( $VIEWPORTMIDDLE/2 ))
 
 if [[ -z ${TOKENID} ]]; then
   echo "Enter moonbird # (press enter for random)"
@@ -38,7 +40,7 @@ FORMATTEDNAME=$(echo "{{ Bold ${NAME} }}" \
 
 HEADER=$(gum style \
         --foreground 212 --border-foreground 212 --border double \
-        --align center  --margin "1 55" --padding "1 1" \
+        --align center   --margin "1 55" --padding "1 1" \
         "Moonbird: ${FORMATTEDNAME}")
 OUTPUT=$(gum style \
         --foreground 212 --border-foreground 212 --border double \
@@ -63,8 +65,8 @@ function getTraitTable () {
 }
 
 
-OUTPUT=$(gum style \
+FOOTER=$(gum style \
         --foreground 212 --border-foreground 212 --border double \
-        --align center  --margin "1 40" --padding "2 4" \
+        --align center --margin "1 50" --padding "2 4" \
         "$(getTraitTable)")
-echo "${OUTPUT}"
+echo "${FOOTER}"
