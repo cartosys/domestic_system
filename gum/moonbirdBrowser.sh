@@ -4,18 +4,21 @@ clear
 STORAGEFOLDER=/tmp/domestic_system_storage
 [ ! -d "${STORAGEFOLDER}" ] && mkdir ${STORAGEFOLDER}
 
-echo "Enter moonbird # (press enter for random)"
-TOKENID=$(gum input --cursor.foreground "#FF0" --prompt.foreground "#0FF" --prompt "* " --placeholder 1234)
+TOKENID=$1
 
 if [[ -z ${TOKENID} ]]; then
-    TOKENID=$(( ( RANDOM % 10000 )  + 1 ))
+  echo "Enter moonbird # (press enter for random)"
+  TOKENID=$(gum input --cursor.foreground "#FF0" --prompt.foreground "#0FF" --prompt "* " --placeholder 1234)
+fi
+if [[ -z ${TOKENID} ]]; then
+    TOKENID=$(( ( RANDOM % 10000 ) ))
 fi
 
 IMAGEFILE=${STORAGEFOLDER}/${TOKENID}.image
 if [[ ! -f "$IMAGEFILE" ]]; then
     until curl -s -f -o  ${IMAGEFILE} https://live---metadata-5covpqijaa-uc.a.run.app/images/${TOKENID}
     do
-      gum spin --spinner dot --title "Fetching Moonbird image..." -- sleep 2
+      gum spin --spinner dot --title "Fetching Moonbird image..." -- sleep 4
     done
 fi
 MOONBIRD=$(jp2a --fill --size=40x20 --colors ${IMAGEFILE})
@@ -24,7 +27,7 @@ METADATAFILE=${STORAGEFOLDER}/${TOKENID}.data
 if [[ ! -f "$METADATAFILE" ]]; then
     until curl -s -f -o ${METADATAFILE} https://live---metadata-5covpqijaa-uc.a.run.app/metadata/${TOKENID}
     do
-      gum spin --spinner dot --title "Fetching Moonbird data..." -- sleep 2
+      gum spin --spinner dot --title "Fetching Moonbird data..." -- sleep 4
     done
 fi
 MOONBIRDDATA=$(cat ${METADATAFILE} | jq -c '.attributes')
