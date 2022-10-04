@@ -11,20 +11,25 @@ NODECIMALS=$(curl -s 'http://127.0.0.1:8545/' \
     {"from": "0x185B520F3536362DF300EF5f5bb1ebb47900A7BF",
      "to": "0x8cEd2B545A881c220F023fa9DfBf5E466a29E6D5",
      "gas": "0x76c0","gasPrice": "0x0","value": "0x0",
-     "data": "313ce567"}, "latest"],"id":1}' | jq '.result')  #data field is Keccak256("totalSupply()")     https://emn178.github.io/online-tools/keccak_256.html
-echo "${NODECIMALS:3}" 
-printf "%d\n" "${NODECIMALS}"
+     "data": "313ce567"}, "latest"],"id":1}' | jq '.result' | tr -d '"' )  #data field is Keccak256("totalSupply()")     https://emn178.github.io/online-tools/keccak_256.html
+NODECIMALS=$(echo "${NODECIMALS:2}" | sed 's/^0*//')
+NODECIMALS=$(echo "obase=10; ibase=16; ${NODECIMALS}" | bc)
+echo "Number of decimals in ERC20 contract: "$NODECIMALS
 
 
 #gets total supply of ERC20
-TOTALSUPPLYDATA=$(curl -s 'http://127.0.0.1:8545/' \
-    -X POST \
-    -H "Content-Type: application/json" \
-    -d '{"jsonrpc":"2.0","method":"eth_call","params": [
-    {"from": "0x185B520F3536362DF300EF5f5bb1ebb47900A7BF",
-     "to": "0x8cEd2B545A881c220F023fa9DfBf5E466a29E6D5",
-     "gas": "0x76c0","gasPrice": "0x0","value": "0x0",
-     "data": "0x18160ddd"}, "latest"],"id":1}' | jq '.result' )  #data field is Keccak256("totalSupply()")
+#TODO hex value is too large. how to handle bigints in bash?
+#TOTALSUPPLYDATA=$(curl -s 'http://127.0.0.1:8545/' \
+#    -X POST \
+#    -H "Content-Type: application/json" \
+#    -d '{"jsonrpc":"2.0","method":"eth_call","params": [
+#    {"from": "0x185B520F3536362DF300EF5f5bb1ebb47900A7BF",
+#     "to": "0x8cEd2B545A881c220F023fa9DfBf5E466a29E6D5",
+#     "gas": "0x76c0","gasPrice": "0x0","value": "0x0",
+#     "data": "0x18160ddd"}, "latest"],"id":1}' | jq '.result' | tr -d '"')  #data field is Keccak256("totalSupply()")
 
-echo "${TOTALSUPPLYDATA:3}"
-printf "%d\n" "${TOTALSUPPLYDATA}"
+#TOTALSUPPLYDATA=$(echo "${TOTALSUPPLYDATA:2}" | sed 's/^0*//')
+
+#echo "Total Supply in ERC20 contract: "$TOTALSUPPLYDATA
+#TOTALSUPPLYDATA=$(echo $((${TOTALSUPPLYDATA})) )
+#echo "Total Supply in ERC20 contract: "$TOTALSUPPLYDATA

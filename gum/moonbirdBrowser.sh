@@ -23,7 +23,8 @@ if [[ ! -f "$IMAGEFILE" ]]; then
       gum spin --spinner dot --title "Fetching Moonbird image..." -- sleep 4
     done
 fi
-MOONBIRD=$(jp2a --fill --size=40x20 --colors ${IMAGEFILE})
+#MOONBIRD=$(jp2a --fill --size=40x20 --colors ${IMAGEFILE})
+MOONBIRD=$(cat ${IMAGEFILE} | imgcat )
 
 METADATAFILE=${STORAGEFOLDER}/${TOKENID}.data
 if [[ ! -f "$METADATAFILE" ]]; then
