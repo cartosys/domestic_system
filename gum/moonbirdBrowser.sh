@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 clear
 #set up tmp file system
-STORAGEFOLDER=/tmp/domestic_system_storage
-[ ! -d "${STORAGEFOLDER}" ] && mkdir ${STORAGEFOLDER}
+STORAGEFOLDER=/tmp/domestic_system_storage/moonbirdsBrowser
+[ ! -d "${STORAGEFOLDER}" ] && mkdir -p ${STORAGEFOLDER}
 
 TOKENID=$1
 #VIEWPORTMIDDLE=$(tput cols)
