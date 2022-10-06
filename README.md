@@ -20,3 +20,10 @@ https://github.com/readme/featured/future-of-the-command-line
 
 #more examples at the bottom of the podcast
 https://changelog.com/podcast/481
+
+#mnemonic generators
+https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki
+24 word generator
+
+#Generates mnemonic and ssh key from it
+go run generate.go | melt restore - --seed - //replace first "-" with a filename to generate both pub and prv key
