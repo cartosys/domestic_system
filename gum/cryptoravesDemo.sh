@@ -12,20 +12,24 @@ NODECIMALS=$(curl -s 'http://127.0.0.1:8545/' \
      "to": "0x6a8413f056f1e53bc58a8a04fa746be4c6131336",
      "gas": "0x76c0","gasPrice": "0x0","value": "0x0",
      "data": "0x313ce567"}, "latest"],"id":1}' | jq '.result' | tr -d '"' )  #data field is Keccak256("totalSupply()")     https://emn178.github.io/online-tools/keccak_256.html
-echo ${NODECIMALS:2}
-NODECIMALS=$(echo "${NODECIMALS:2}" | sed 's/^0*//')
 
+NODECIMALS=$(echo "${NODECIMALS:2}" | sed 's/^0*//' | tr '[:lower:]' '[:upper:]')
 NODECIMALS=$(echo "obase=10; ibase=16; ${NODECIMALS}" | bc)
+echo ${NODECIMALS}
 echo "Number of decimals in ERC20 contract: "$NODECIMALS
 
 
-#decimals() 0xbb844440
+#decimals() 0x313ce567
+#totalSupply() 0x18160ddd
+
+
+
 
 #get eth block Number
 #curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}'
 
 #gets total supply of ERC20
-#TODO hex value is too large. how to handle bigints in bash?
+#TODO hex value is too large. how to  handle bigints in bash?
 #TOTALSUPPLYDATA=$(curl -s 'http://127.0.0.1:8545/' \
 #    -X POST \
 #    -H "Content-Type: application/json" \
