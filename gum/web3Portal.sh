@@ -8,9 +8,9 @@ if [[ ! -f "$SSHFILE" ]]; then
   STORAGEFOLDER=~/.ssh
   [ ! -d "${STORAGEFOLDER}" ] && mkdir -p ${STORAGEFOLDER} && chown 700 ${STORAGEFOLDER}
 
-  KEYCHOICE=$(gum choose "Create a new private key" "Manually enter a seed phrase")
+  KEYCHOICE=$(gum choose "Generate a new private key" "Manually enter a seed phrase")
 
-  if [[ "${KEYCHOICE}" ==  "Create a new private key" ]]; then
+  if [[ "${KEYCHOICE}" ==  "Generate a new private key" ]]; then
 
     gum spin --spinner dot --title "Generating New Seed Phrase & Private Key..." -- sleep 3
 
