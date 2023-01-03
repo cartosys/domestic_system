@@ -2,16 +2,28 @@ package main
 
 import (
 	"fmt"
-
-	//"github.com/ethereum/go-ethereum/accounts/keystore"
+	"os"
 	"github.com/tyler-smith/go-bip39"
 	hdwallet "github.com/miguelmota/go-ethereum-hdwallet"
 )
 
 func main() {
-	// Generate a mnemonic
-	entropy, _ := bip39.NewEntropy(256)
-	mnemonic, _ := bip39.NewMnemonic(entropy)
+
+	//check if mnemonic exists
+	mnemonic, ok := os.LookupEnv("MNEMONICSEEDPHRASE")
+	if ok {
+		fmt.Println("mnemonic exists continuing...")
+		mnemonic = os.Getenv("MNEMONICSEEDPHRASE")
+	} else {
+		fmt.Println("mnemonic is not set generating new one")
+		// Generate a mnemonic
+		entropy, _ := bip39.NewEntropy(256)
+		mnemonic, _ = bip39.NewMnemonic(entropy)
+
+		//set mnemonic env var
+		//os.Setenv("MNEMONICSEEDPHRASE", mnemonic)
+	}
+
 	fmt.Println(mnemonic)
 
 	// Create an HD wallet from the mnemonic
