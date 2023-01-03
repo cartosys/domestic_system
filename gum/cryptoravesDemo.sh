@@ -23,6 +23,9 @@ echo "Number of decimals in ERC20 contract: "$NODECIMALS
 #validateCommand 0x25a43f0b   //from abi json file
 #isAdministrator 0x0a2eb301
 
+#rpc call guide: https://www.quicknode.com/guides/ethereum-development/how-to-look-up-wallet-balance-of-an-erc20-token-using-rpc-api
+
+
 #isAdministrator (for validatorcontract)
 curl -s 'http://127.0.0.1:8545/'     -X POST     -H "Content-Type: application/json"     -d '{"jsonrpc":"2.0","method":"eth_call","params": [    {"from": "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",     "to": "0x54c212df20189572af0552001ff11d81417f8168",     "gas":"0x76c0","gasPrice":"0x0","value": "0x0",     "data": "0x0a2eb301000000000000000000000000f39fd6e51aad88f6f4ce6ab8827279cfffb92266"}, "latest"],"id":1}'
 
