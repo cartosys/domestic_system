@@ -22,7 +22,7 @@ func GenerateMnemonic() string {
 	if ok {
 		fmt.Println("mnemonic exists continuing...")
 	} else {
-		fmt.Println("mnemonic is not set generating new one")
+		fmt.Println("mnemonic is not set generating new one. Write it down or LOSE EVERYTHING")
 		// Generate a mnemonic
 		entropy, _ := bip39.NewEntropy(256)
 		mnemonic, _ = bip39.NewMnemonic(entropy)

@@ -99,25 +99,16 @@ func (m model) View() string {
 func List() {
 	fmt.Println(GenerateMnemonic())
 
-	addresses := GenerateAddressRangeFromMnemonic(0, 20)
-	items := []list.Item{
-		item(addresses[0]),
-		item(addresses[1]),
-		item(addresses[2]),
-		item(addresses[3]),
-		item(addresses[4]),
-		item(addresses[5]),
-		item(addresses[6]),
-		item(addresses[7]),
-		item(addresses[8]),
-		item(addresses[9]),
-		item(addresses[10]),
+	addresses := GenerateAddressRangeFromMnemonic(10, 20)
+	items := []list.Item{}
+	for i := 0; i < len(addresses); i++ {
+		items = append(items, item(addresses[i]))
 	}
 
 	const defaultWidth = 20
 
 	l := list.New(items, itemDelegate{}, defaultWidth, listHeight)
-	l.Title = "What do you want for dinner?"
+	l.Title = "Which account will you use?"
 	l.SetShowStatusBar(false)
 	l.SetFilteringEnabled(false)
 	l.Styles.Title = titleStyle
