@@ -8,6 +8,7 @@ import (
 	"github.com/charmbracelet/bubbles/list"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
+
 )
 
 const listHeight = 14
@@ -96,17 +97,21 @@ func (m model) View() string {
 }
 
 func List() {
+	fmt.Println(GenerateMnemonic())
+
+	addresses := GenerateAddressRangeFromMnemonic(0, 20)
 	items := []list.Item{
-		item("Ramen"),
-		item("Tomato Soup"),
-		item("Hamburgers"),
-		item("Cheeseburgers"),
-		item("Currywurst"),
-		item("Okonomiyaki"),
-		item("Pasta"),
-		item("Fillet Mignon"),
-		item("Caviar"),
-		item("Just Wine"),
+		item(addresses[0]),
+		item(addresses[1]),
+		item(addresses[2]),
+		item(addresses[3]),
+		item(addresses[4]),
+		item(addresses[5]),
+		item(addresses[6]),
+		item(addresses[7]),
+		item(addresses[8]),
+		item(addresses[9]),
+		item(addresses[10]),
 	}
 
 	const defaultWidth = 20

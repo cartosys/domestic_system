@@ -1,4 +1,4 @@
-package main
+package wallet
 
 import (
 	"fmt"
@@ -7,13 +7,20 @@ import (
 	hdwallet "github.com/miguelmota/go-ethereum-hdwallet"
 )
 
-func main() {
+/*func main() {
 
+	fmt.Println(GenerateMnemonic())
+
+	addresses := GenerateAddressRangeFromMnemonic(0, 20)
+	fmt.Println(addresses)
+
+}*/
+
+func GenerateMnemonic() string {
 	//check if mnemonic exists
 	mnemonic, ok := os.LookupEnv("MNEMONICSEEDPHRASE")
 	if ok {
 		fmt.Println("mnemonic exists continuing...")
-		mnemonic = os.Getenv("MNEMONICSEEDPHRASE")
 	} else {
 		fmt.Println("mnemonic is not set generating new one")
 		// Generate a mnemonic
@@ -21,18 +28,23 @@ func main() {
 		mnemonic, _ = bip39.NewMnemonic(entropy)
 
 		//set mnemonic env var
-		//os.Setenv("MNEMONICSEEDPHRASE", mnemonic)
+		//TODO: this onlyh sets the env var during the run session. It clears when program completes
+		os.Setenv("MNEMONICSEEDPHRASE", mnemonic)
 	}
+	return mnemonic
+}
 
-	fmt.Println(mnemonic)
+func GenerateAddressRangeFromMnemonic(first int, numberOf int) []string {
 
 	// Create an HD wallet from the mnemonic
-	wallet, _ := hdwallet.NewFromMnemonic(mnemonic)
+	wallet, _ := hdwallet.NewFromMnemonic(os.Getenv("MNEMONICSEEDPHRASE"))
 
-	for i := 0; i < 10; i++ {
-		// Generate an Ethereum account
+	var addresses []string
+
+	 for i := first; i < first+numberOf; i++ {
 		path := hdwallet.MustParseDerivationPath(fmt.Sprintf("m/44'/60'/0'/0/%d", i))
 		account, _ := wallet.Derive(path, false)
-		fmt.Printf("Account %d address: %s\n", i, account.Address.Hex())
-	}
+		addresses = append(addresses, account.Address.Hex())
+	 }
+	 return addresses
 }
