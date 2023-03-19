@@ -97,8 +97,8 @@ func (m model) View() string {
 }
 
 func List() {
-	fmt.Println(GenerateMnemonic())
 
+	KeyFileCheck()
 	addresses := GenerateAddressRangeFromMnemonic(10, 20)
 	items := []list.Item{}
 	for i := 0; i < len(addresses); i++ {
