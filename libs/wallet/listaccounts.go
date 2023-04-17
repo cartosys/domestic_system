@@ -8,6 +8,7 @@ import (
 	"github.com/charmbracelet/bubbles/list"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
+
 )
 
 const listHeight = 14
@@ -90,29 +91,24 @@ func (m model) View() string {
 		return quitTextStyle.Render(fmt.Sprintf("%s? Sounds good to me.", m.choice))
 	}
 	if m.quitting {
-		return quitTextStyle.Render("Not hungry? That’s cool.")
+		return quitTextStyle.Render("Not ready for the browserless web? That’s cool.")
 	}
 	return "\n" + m.list.View()
 }
 
 func List() {
-	items := []list.Item{
-		item("Ramen"),
-		item("Tomato Soup"),
-		item("Hamburgers"),
-		item("Cheeseburgers"),
-		item("Currywurst"),
-		item("Okonomiyaki"),
-		item("Pasta"),
-		item("Fillet Mignon"),
-		item("Caviar"),
-		item("Just Wine"),
+
+	KeyFileCheck()
+	addresses := GenerateAddressRangeFromMnemonic(10, 20)
+	items := []list.Item{}
+	for i := 0; i < len(addresses); i++ {
+		items = append(items, item(addresses[i]))
 	}
 
 	const defaultWidth = 20
 
 	l := list.New(items, itemDelegate{}, defaultWidth, listHeight)
-	l.Title = "What do you want for dinner?"
+	l.Title = "Which account will you use?"
 	l.SetShowStatusBar(false)
 	l.SetFilteringEnabled(false)
 	l.Styles.Title = titleStyle
