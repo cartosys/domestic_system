@@ -63,5 +63,12 @@ docker inspect <serverID from above> | grep '"IPAddress"' | head -n 1
 
 #discord cli
 https://www.reddit.com/r/commandline/comments/12lm6au/discordo_a_tui_interface_for_discord_that_doesnt/
+
 #spotify cli
 https://www.reddit.com/r/unixporn/comments/12mavz9/oc_spotify_for_terminal_with_cover_art_rendering/
+
+#Soothing pastel theme for the high-spirited!
+https://github.com/catppuccin
+
+#generate music from linux entropy
+https://www.reddit.com/r/commandline/comments/12p9zp4/generate_music_from_the_entropy_of_linux_linuxwave/
