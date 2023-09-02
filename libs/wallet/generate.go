@@ -2,6 +2,7 @@ package wallet
 
 import (
 	"fmt"
+	"log"
 	"os"
 
 	//for creating & writing to ssh key file
@@ -63,7 +64,19 @@ func GenerateAddressRangeFromMnemonic(first int, numberOf int) []string {
 	for i := first; i < first+numberOf; i++ {
 		path := hdwallet.MustParseDerivationPath(fmt.Sprintf("m/44'/60'/0'/0/%d", i))
 		account, _ := wallet.Derive(path, false)
+<<<<<<< HEAD
+		fmt.Printf("Account %d address: %s\n", i, account.Address.Hex())
+		privateKey, err := wallet.PrivateKeyHex(account)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		// Print the private key
+		fmt.Printf("Private key: %s\n", privateKey)
+		//fmt.Printf("Private key: %s\n", common.ToHex(crypto.FromECDSA(privateKey)))
+=======
 		addresses = append(addresses, account.Address.Hex())
+>>>>>>> dcebfb9b249855d4b8016785bfe9945a60055fad
 	}
 	return addresses
 }
