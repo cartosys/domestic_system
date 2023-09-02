@@ -6,7 +6,7 @@
 lol()
 {
     if [ -t 1 ]; then
-        "$@" | lolcat -a -d 1 -F .05 -S 290 #toggle last param to gradiate color palette
+        "$@" | lolcat -F .05 -S 290 #toggle last param to gradiate color palette
     else
         "$@"
     fi
@@ -17,6 +17,7 @@ COMMANDS=(
    cat
    man
    nano
+   git
 )
 
 for COMMAND in "${COMMANDS[@]}"; do
