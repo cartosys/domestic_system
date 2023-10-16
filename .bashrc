@@ -18,6 +18,7 @@ COMMANDS=(
    man
    nano
    git
+   ssh
 )
 
 for COMMAND in "${COMMANDS[@]}"; do

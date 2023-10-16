@@ -72,3 +72,5 @@ https://github.com/catppuccin
 
 #generate music from linux entropy
 https://www.reddit.com/r/commandline/comments/12p9zp4/generate_music_from_the_entropy_of_linux_linuxwave/
+
+#see .bashrc for cli beautification mods
