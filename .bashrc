@@ -19,6 +19,7 @@ COMMANDS=(
    nano
    git
    ssh
+   rsync
 )
 
 for COMMAND in "${COMMANDS[@]}"; do
